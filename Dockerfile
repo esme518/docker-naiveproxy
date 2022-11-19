@@ -26,6 +26,9 @@ ENV EMAIL me@example.com
 ENV USER user
 ENV PASSWORD=
 
+EXPOSE 443
+EXPOSE 443/udp
+
 WORKDIR /etc/caddy
 
 ENTRYPOINT ["/entrypoint.sh"]
