@@ -1,6 +1,8 @@
-:443, DOMAIN
-tls EMAIL
-route {
+{
+	order forward_proxy before file_server
+}
+:443, DOMAIN {
+	tls EMAIL
 	forward_proxy {
 		basic_auth USER PASSWORD
 		hide_ip
@@ -8,6 +10,6 @@ route {
 		probe_resistance
 	}
 	file_server {
-		root /usr/share/caddy
+		root /var/www/html
 	}
 }
