@@ -2,24 +2,25 @@
 # Dockerfile for naiveproxy
 #
 
-FROM golang:alpine as builder
+FROM caddy:builder as builder
 
 RUN set -ex \
-  && go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest \
-  && bin/xcaddy build --with github.com/caddyserver/forwardproxy@caddy2=github.com/klzgrad/forwardproxy@naive \
-  && ./caddy version
+  && xcaddy build \
+  --with github.com/caddyserver/forwardproxy@caddy2=github.com/klzgrad/forwardproxy@naive
 
 FROM alpine
 
-COPY --from=builder /go/caddy /usr/bin/caddy
+COPY --from=builder /usr/bin/caddy /usr/bin/caddy
 COPY Caddyfile.init /etc/caddy/Caddyfile.init
 COPY docker-entrypoint.sh /entrypoint.sh
 
 RUN set -ex \
   && apk add --update --no-cache \
      ca-certificates \
-  && mkdir -p /usr/share/caddy \
   && rm -rf /tmp/* /var/cache/apk/*
+
+ENV XDG_CONFIG_HOME /config
+ENV XDG_DATA_HOME /data
 
 ENV DOMAIN example.com
 ENV EMAIL me@example.com
