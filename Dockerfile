@@ -22,7 +22,7 @@ RUN set -ex \
 ENV XDG_CONFIG_HOME /config
 ENV XDG_DATA_HOME /data
 
-ENV DOMAIN example.com
+ENV ADDRESS example.com
 ENV EMAIL me@example.com
 ENV USER user
 ENV PASSWORD=

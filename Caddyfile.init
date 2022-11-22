@@ -1,7 +1,7 @@
 {
 	order forward_proxy before file_server
 }
-:443, DOMAIN {
+ADDRESS {
 	tls EMAIL
 	forward_proxy {
 		basic_auth USER PASSWORD
