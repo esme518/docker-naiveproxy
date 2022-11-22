@@ -11,12 +11,12 @@ fi
 if [ ! -f /etc/caddy/Caddyfile ]; then
 	PASSWORD=$(cat passwd)
 	cp /etc/caddy/Caddyfile.init /etc/caddy/Caddyfile
-	sed -i "s/DOMAIN/$DOMAIN/g" /etc/caddy/Caddyfile
+	sed -i "s/ADDRESS/$ADDRESS/g" /etc/caddy/Caddyfile
 	sed -i "s/EMAIL/$EMAIL/g" /etc/caddy/Caddyfile
 	sed -i "s/USER/$USER/g" /etc/caddy/Caddyfile
 	sed -i "s/PASSWORD/$PASSWORD/g" /etc/caddy/Caddyfile
 	echo "NaïveProxy Initialized"
-	echo \""proxy"\": \""https://$USER:$PASSWORD@$DOMAIN"\"
+	echo \""proxy"\": \""https://$USER:$PASSWORD@$ADDRESS"\"
 fi
 
 exec "$@"
