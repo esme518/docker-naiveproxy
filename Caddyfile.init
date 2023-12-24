@@ -10,6 +10,6 @@ ADDRESS {
 		probe_resistance
 	}
 	file_server {
-		root /var/www/html
+		root /usr/share/caddy
 	}
 }
