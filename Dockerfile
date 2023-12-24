@@ -8,19 +8,14 @@ RUN set -ex \
   && xcaddy build \
   --with github.com/caddyserver/forwardproxy@caddy2=github.com/klzgrad/forwardproxy@naive
 
-FROM alpine
+FROM caddy:alpine
 
 COPY --from=builder /usr/bin/caddy /usr/bin/caddy
 COPY Caddyfile.init /etc/caddy/Caddyfile.init
 COPY docker-entrypoint.sh /entrypoint.sh
 
 RUN set -ex \
-  && apk add --update --no-cache \
-     ca-certificates \
-  && rm -rf /tmp/* /var/cache/apk/*
-
-ENV XDG_CONFIG_HOME /config
-ENV XDG_DATA_HOME /data
+  && rm -rf /etc/caddy/Caddyfile
 
 ENV ADDRESS example.com
 ENV EMAIL me@example.com
